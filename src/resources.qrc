@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>lang/ru_RU.qm</file>
+        <file>index.ico</file>
+    </qresource>
+</RCC>

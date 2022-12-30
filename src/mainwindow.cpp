@@ -113,10 +113,14 @@ MainWindow::MainWindow(QWidget *parent)
 		}
 	} );
 	connect( m_pProcess, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), [=](int exitCode, QProcess::ExitStatus exitStatus){
+#ifdef QT_DEBUG
 		qDebug()<<"EXIT"<<exitCode << exitStatus;
+#endif
 	});
 	connect( m_pProcess, &QProcess::readyReadStandardError, this, [this](){
+#ifdef QT_DEBUG
 		qDebug()<<"E"<<m_pProcess->readAllStandardError();
+#endif
 	} );
 	connect( m_pProcess, &QProcess::readyReadStandardOutput, this, [this](){
 		m_inputBuff.append( m_pProcess->readAllStandardOutput() );
@@ -345,7 +349,9 @@ void MainWindow::inputProcess()
 			if( m_help ){
 				m_pHelpWindow->addHelpLine( string );
 			}else{
+#ifdef QT_DEBUG
 				qDebug() << ">:" << string;
+#endif
 			}
 
 			if( helpMode ){
